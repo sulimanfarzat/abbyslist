@@ -1,0 +1,174 @@
+<form [formGroup]="addressForm" novalidate (ngSubmit)="onSubmit()">
+  <mat-card class="container" >
+    <mat-card-header>
+      <mat-card-title>Address, Neighborhood or ZIP | &nbsp;  
+        <span> You selected: {{ selectedHomeType + ' and ' + selectedWhat }}</span>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <!-- <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Company" formControlName="company">
+          </mat-form-field>
+        </div>
+      </div> -->
+      <!-- <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="First name" formControlName="firstName">
+            <mat-error *ngIf="addressForm.controls['firstName'].hasError('required')">
+              First name is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Last name" formControlName="lastName">
+            <mat-error *ngIf="addressForm.controls['lastName'].hasError('required')">
+              Last name is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div> -->
+      <!-- <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <textarea matInput placeholder="Address" formControlName="address"></textarea>
+            <mat-error *ngIf="addressForm.controls['address'].hasError('required')">
+              Address is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div> -->
+      <!-- <div class="row" *ngIf="!hasUnitNumber">
+        <div class="col">
+          <button mat-button type="button" (click)="hasUnitNumber = !hasUnitNumber">
+            + Add C/O, Apt, Suite, Unit
+          </button>
+        </div>
+      </div> -->
+      
+      <!-- <div *ngIf="hasUnitNumber">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <textarea matInput placeholder="Address 2" formControlName="address2"></textarea>
+          </mat-form-field>
+        </div>
+      </div> -->
+
+      <div class="row">
+        <div class="col-md-auto">
+          <mat-form-field class="full-width">
+            <mat-select placeholder="What !" formControlName="what" [(value)]="selectedWhat">
+              <mat-option *ngFor="let item of what" [value]="item">{{ item }}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="addressForm.controls['what'].hasError('required')">
+                waht is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput 
+                   placeholder="Enter an address, neighborhood, city, or ZIP code" 
+                   formControlName="city"
+                   matGoogleMapsAutocomplete
+                   country="us"
+                   type="address"
+                   (onAutocompleteSelected)="onAutocompleteSelected($event)"
+                   (onLocationSelected)="onLocationSelected($event)">
+            <mat-error *ngIf="addressForm.controls['city'].hasError('required')">
+              City is <strong>required</strong>
+            </mat-error>
+            <button mat-button matSuffix mat-icon-button type="button" aria-label="Location" (click)="setCurrentPosition()">
+                <mat-icon>my_location</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+  
+
+
+        <div class="col-md-auto">
+            <mat-form-field class="full-width">
+              <mat-select placeholder="Home Type" formControlName="homeTypes" [(value)]="selectedHomeType">
+                <mat-option *ngFor="let homeType of homeTypes" [value]="homeType">
+                  {{ homeType }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="addressForm.controls['homeTypes'].hasError('required')">
+                  Home Type is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+        </div>
+        <!-- <div class="col-md-auto">
+          <mat-form-field class="full-width">
+            <mat-select placeholder="State" formControlName="state">
+              <mat-option *ngFor="let state of states" [value]="state.abbreviation">
+                {{ state.name }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="addressForm.controls['state'].hasError('required')">
+              State is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div> -->
+        <div class="col col-lg-2">
+        <mat-card-actions>
+            <button mat-raised-button color="primary" type="submit" class="full-width">Submit</button>
+        </mat-card-actions>
+        </div>
+      </div>
+
+      
+      <div>
+        <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
+          <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+        </agm-map>
+      </div>
+      
+      <!-- <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput #postalCode maxlength="5" placeholder="Postal Code" type="number" formControlName="postalCode">
+            <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
+          </mat-form-field>
+        </div>
+      </div> -->
+      <!-- <div class="row">
+        <div class="col">
+          <mat-radio-group formControlName="shipping">
+            <mat-radio-button value="free">Haus</mat-radio-button>
+            <mat-radio-button value="priority">Cars</mat-radio-button>
+            <mat-radio-button value="nextday">xxxx</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div> -->
+    </mat-card-content>
+    <!-- <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit">Submit</button>
+    </mat-card-actions> -->
+  </mat-card>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

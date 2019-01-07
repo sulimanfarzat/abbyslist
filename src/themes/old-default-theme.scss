@@ -1,0 +1,131 @@
+// @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+// @import './../../node_modules/@angular/material/theming';
+@import '~@angular/material/theming';
+@include mat-core();
+
+ // Define an alternate light theme.
+$default-primary: mat-palette($mat-indigo, 600 , 700);
+$default-accent:  mat-palette($mat-pink, A200, A100, A400);
+$default-warn:    mat-palette($mat-red);
+// Create the theme object (a Sass map containing all of the palettes).
+$default-theme: mat-light-theme(
+  $default-primary, 
+  $default-accent, 
+  $default-warn
+  );
+
+ // Define an alternate dark theme.
+$dark-primary: mat-palette($mat-blue-grey);
+$dark-accent:  mat-palette($mat-amber, A200, A100, A400);
+$dark-warn:    mat-palette($mat-deep-orange);
+$dark-theme:   mat-dark-theme(
+  $dark-primary, 
+  $dark-accent, 
+  $dark-warn
+  ); 
+
+// define 3 theme color
+// mat-palette accepts $palette-name, main, lighter and darker variants
+$blue-theme-primary: mat-palette($mat-indigo, 700, 300, 900);
+$blue-theme-accent: mat-palette($mat-light-blue);
+$blue-theme-warn: mat-palette($mat-deep-orange, A200);
+// create theme (use mat-dark-theme for themes with dark backgrounds)
+$blue-theme: mat-light-theme(
+    $blue-theme-primary,
+    $blue-theme-accent,
+    $blue-theme-warn
+);
+
+
+// Define a mixin that accepts a theme and outputs the theme-specific styles.
+@mixin candy-carousel-theme($default-theme) {
+  // Extract the palettes you need from the theme definition.
+  $primary: map-get($default-theme, primary);
+  $accent: map-get($default-theme, accent);
+  $warn: map-get($default-theme, warn);
+  $background: map-get($default-theme, background);
+  $foreground: map-get($default-theme, foreground);
+
+  // Define any styles affected by the theme.
+  .candy-carousel {
+    // Use mat-color to extract individual colors a palette.
+    background-color: #00335e;// mat-color($primary);
+    border-color: mat-color($accent, A400);
+    // Get the default hue for a palette.
+    color: mat-color($primary, default-contrast);
+    // Get a relative color for a hue ('lighter' or 'darker')
+    outline-color: mat-color($accent, 100);
+    // Get a constrast color for a hue by adding `-contrast` to any other key.
+    border-color: mat-color($primary, 100);
+  }
+
+  @media screen and (min-width: 961px), screen and (min-height: 737px) {
+    // .mat-list-base, .mat-list-item {
+    //   color: rgb(184, 184, 184) !important;
+    //   // font-size: 12px
+    //   }
+    // .router-link-active{
+    //     color: white !important;
+    //   }  
+  }
+  .mat-nav-list a.active {
+    color: mat-color($default-primary,  '800-contrast')!important;
+  }
+
+  .matElevation {
+    @include mat-elevation-transition;
+    @include mat-elevation(2);
+    &:hover {
+      @include mat-elevation(8);
+      background-color: mat-color($default-primary, 300 ) !important;
+      // border-color: mat-color($dark-accent, 800) !important;
+      // color: mat-color($dark-accent, '100-contrast');
+    }
+    &:active {
+      @include mat-elevation(10);
+    }
+  }
+
+  
+}
+  
+$custom-typography: mat-typography-config(
+  $font-family: 'Roboto, monospace',
+  $headline: mat-typography-level(32px, 48px, 700),
+  $body-1: mat-typography-level(16px, 24px, 500)
+);
+@mixin candy-carousel-typography($config) {
+  .candy-carousel {
+    font: {
+      family: mat-font-family($config, body-1);
+      size: mat-font-size($config, body-1);
+      weight: mat-font-weight($config, body-1);
+    }
+  }
+}
+
+// Define a custom typography config that overrides the font-family as well as the
+// `headlines` and `body-1` levels.
+$custom-typography: mat-typography-config(
+  $font-family: 'Roboto, monospace',
+  $headline: mat-typography-level(32px, 48px, 700),
+  $body-1: mat-typography-level(16px, 24px, 500)
+);
+
+
+
+
+
+
+
+
+
+
+// .custom-theme{
+@include angular-material-theme($default-theme);
+@include candy-carousel-theme($default-theme);
+// @include mat-core($custom-typography);
+// }
+.unicorn-dark-theme {
+    @include angular-material-theme($dark-theme);
+}

@@ -1,0 +1,53 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 200px;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary{
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.mat-toolbar-row-form {
+  // top: 50px;
+  // z-index: 1;
+  display: inline-table;
+}
+
+.navBarButtons{
+  display: flex !important;
+  // flex-wrap: wrap;
+  align-items: center;
+  padding: 0px 16px;
+}
+
+.button-row button,
+.button-row a {
+  margin-right: 8px;
+}
+
+
+
+.Padding-8 {
+      padding-top: 8px;
+    } 
+
+.noPadding-Toolbar {
+      padding-top: 0px !important;
+   }
+
+
+
+// @media only screen and (min-width: 961px), screen and (min-height: 737px) {
+//   .mat-list-base {
+//     padding-top: 0px !important;
+//   } 
+// }

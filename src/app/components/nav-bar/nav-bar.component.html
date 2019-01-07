@@ -1,0 +1,113 @@
+<mat-sidenav-container  class="sidenav-container">
+
+  <mat-sidenav #drawer 
+      class="sidenav"
+      fixedInViewport="false"
+      [ngClass]="{'hidden': !(isHandset$ | async)}"
+      [attr.role]="(isHandset$ |async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'close'" 
+      closed [opened]="(false | async)">
+    <!--"!(isHandset$ | async)" -->
+    <mat-toolbar>
+      Menu
+      <span class="spacer"></span>
+			<button mat-icon-button (click)="drawer.close()" matTooltip="Close sidenav" matTooltipPosition="right">
+        <mat-icon>keyboard_arrow_left</mat-icon>
+      </button>
+    </mat-toolbar>
+    <mat-nav-list>
+      <app-tool-bars></app-tool-bars>
+    </mat-nav-list>
+    
+    <span class="spacer"></span>
+
+        <mat-icon class="icon">account_circle</mat-icon>
+        <mat-icon *ngIf="(isHandset$ | async) ? null : 'account_box' " class="icon">account_box</mat-icon>
+      
+    <mat-divider></mat-divider>
+    <!-- <span class="spacer"></span>
+    <mat-icon class="example-icon">favorite</mat-icon> -->
+  </mat-sidenav>
+
+
+
+
+
+
+  <mat-sidenav-content>
+    <mat-toolbar class="mat-elevation-z3">
+
+      <mat-toolbar-row>
+
+        <mat-nav-list [ngClass]="{ '' : (isHandset$ | async), 'noPadding-Toolbar': !(isHandset$ | async) }">
+                  <button type="button" 
+                    aria-label="Toggle sidenav" 
+                    mat-icon-button 
+                    (click)="drawer.toggle()"
+                    *ngIf="isHandset$ | async">
+                    <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+                  </button>
+                  <app-tool-bars class="navBarButtons" *ngIf="!(isHandset$ | async)"></app-tool-bars>
+        </mat-nav-list>
+        
+        <span class="spacer"></span>
+        
+        <!-- menu start -->
+        <div class="button-row">
+          <button
+          (click)="showPreviewSellBtn()"
+          mat-flat-button color="primary">
+          Sell Home
+          </button>
+        </div>
+        <button *ngIf="!(isHandset$ | async)" 
+            mat-button (mouseenter)="trigger.openMenu()" 
+            [matMenuTriggerData]="{name: 'Sally'}"
+            [matMenuTriggerFor]="menu">
+            My Account
+        </button>
+        <!-- on mobile -->
+        <button *ngIf="(isHandset$ | async)" 
+            mat-icon-button [matMenuTriggerFor]="menu" 
+            matTooltip="My Account">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <ng-template matMenuContent let-name="name">
+            <button mat-menu-item (click)="showPreview()">
+              <mat-icon>account_box</mat-icon>
+              <span>Sign in or Join</span>
+            </button>
+            <mat-divider></mat-divider>
+            <button mat-menu-item>
+              <mat-icon>notifications_off</mat-icon>
+              <span>Sign up</span>
+            </button>
+            <mat-divider></mat-divider>
+            <button mat-menu-item>Log off {{name}}</button>
+        
+            <mat-grid-list cols="2" rowHeight="2:1">
+              <mat-grid-tile>1</mat-grid-tile>
+              <mat-grid-tile>2</mat-grid-tile>
+              <mat-grid-tile>3</mat-grid-tile>
+              <mat-grid-tile>4</mat-grid-tile>
+            </mat-grid-list>
+          </ng-template>
+        </mat-menu>
+        <!-- menu end -->
+
+        <!-- <mat-icon *ngIf="!(isHandset$ | async)" class="icon">account_circle</mat-icon> -->
+        <mat-icon *ngIf="!(isHandset$ | async)" class="icon">account_box</mat-icon>
+
+      </mat-toolbar-row>
+
+    </mat-toolbar>
+
+    <!-- Add Content Here start -->
+    <ng-content></ng-content>
+    <!-- Add Content Here end -->
+
+
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

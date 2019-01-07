@@ -1,0 +1,53 @@
+// css for stepper start ****************************
+
+@import '~@angular/material/theming';
+
+@mixin styleStepLine($index) {
+    .mat-horizontal-stepper-header {
+        &+.mat-stepper-horizontal-line:nth-child(#{$index}) {
+            height: 2px;
+            background-image: linear-gradient(to right, #00b495, #00aeea);
+        }
+    }
+  }
+// @mixin styleEditedStepIcon($index) {
+//     .mat-horizontal-stepper-header:nth-child(#{$index}) {
+//         .mat-step-icon:not(.mat-step-icon-selected) {
+//             background-color: red; // mat-color($accent, A400);
+//         }
+//     }
+//   }
+@mixin styleUnEditedStepIcon($index) {
+    .mat-horizontal-stepper-header:nth-child(#{$index}) {
+        .mat-step-icon:not(.mat-step-icon-selected) {
+            background-color: #e8e8e8;
+        }
+    }
+  }
+@mixin styleHiddenStepHeader($index) {
+    .mat-step-header:nth-of-type(#{$index}) {
+        display: none !important;
+    }
+}
+  // mat-horizontal-stepper-header mat-step-header ng-tns-c26-16 ng-star-inserted
+  .last-edited-step-1 {
+    @include styleStepLine(2);
+    // @include styleEditedStepIcon(1);
+    @include styleUnEditedStepIcon(3);
+  }
+  .last-edited-step-2 {
+    @include styleStepLine(2);
+    @include styleStepLine(4);
+    // @include styleEditedStepIcon(1);
+    // @include styleEditedStepIcon(3);
+    @include styleHiddenStepHeader(3);
+  }
+
+ 
+  .hidden-step-header-owner {
+    @include styleHiddenStepHeader(2);
+  }
+  .hidden-step-header-renters {
+    @include styleHiddenStepHeader(3);
+  }
+  // css for stepper end ********************************

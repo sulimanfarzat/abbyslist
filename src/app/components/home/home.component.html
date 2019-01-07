@@ -1,0 +1,95 @@
+<div class="background">
+  <div class="gradient">
+    <div class="container">
+
+            <div class="actions">
+                <mat-tab-group mat-stretch-tabs class="stretched-tabs"  class="mat-elevation-z12">
+                    <mat-tab label="Real Estet">
+                        <ng-template mat-tab-label>
+                            <mat-icon class="example-tab-icon">home</mat-icon>
+                            &nbsp;&nbsp;Real Estet
+                        </ng-template>
+                        <app-address-form></app-address-form>
+                    </mat-tab>
+                    <mat-tab label="Cars">
+                        <ng-template mat-tab-label>
+                            <mat-icon class="example-tab-icon">directions_car</mat-icon>
+                            &nbsp;&nbsp;Cars
+                        </ng-template>
+                        <app-address-form></app-address-form>
+                    </mat-tab>
+                </mat-tab-group>
+            </div>
+      <!-- <div class="actions">
+
+          <mat-grid-list cols="2" rowHeight="{{RowHeight}}" class="mat-elevation-z4">
+            <mat-grid-tile [rowspan]="1" [style.background]="'#ffffff'">
+                <div class="ripple-container" matRipple (click)="toggleToSearchRealEstate()">
+                    {{buttonRealEstate}}
+                </div>
+            </mat-grid-tile>
+
+            <mat-grid-tile [rowspan]="1" [style.background]="'#ffffff'">
+                <div class="ripple-container" matRipple (click)="toggleToSearchCars()" [ngClass]="{'hidden': searchCars }">
+                    {{buttonCars}}
+                </div>
+            </mat-grid-tile>
+          </mat-grid-list>
+
+        <ng-container *ngIf="searchRealEstate" >
+            <div>
+                <app-address-form></app-address-form>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="searchCars" >
+            <div>
+                <app-address-form></app-address-form>
+            </div>
+        </ng-container>
+
+      </div> -->
+
+      <h1>Abby's List</h1>
+      <div class="get-started">
+        test
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+<!-- test geocod -->
+<form class="example-form">
+        <mat-form-field class="example-full-width">
+          <input type="text" placeholder="Pick one" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let option of options  | keyvalue " [value]="option.value">
+              {{option.value}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+</form>
+
+<!-- animation -->
+<button (click)="toggle()">click</button>
+<div [@openClose]="isOpen ? 'open' : 'closed'" class="open-close-container">
+  <p>The box is now {{ isOpen ? 'Open' : 'Closed' }}!</p>
+</div>
+
+<h1>{{ title }}   <i class="fas fa-igloo"></i></h1>
+
+
+
+<!-- this creates a google map on the page with the given lat/lng from -->
+<!-- the component as the initial center of the map: -->
+<div>
+  <agm-map [latitude]="lat" [longitude]="lng">
+    <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+  </agm-map>
+</div> 

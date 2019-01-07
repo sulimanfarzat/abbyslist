@@ -1,0 +1,52 @@
+
+<mat-horizontal-stepper class="mat-elevation-z12" 
+        [ngClass]="{ 'hidden-step-header-owner' : hideOwner , 'hidden-step-header-renters' : hideRenters }"
+        (selectionChange)="stepperOnClick($event)"
+[linear]="false" linear #stepper>
+
+  <mat-step label="Step 1" state="phone" (click)="this.hideOwner = true;">
+    <p>I am </p>
+    <div>
+      <button mat-button matStepperNext>Next</button>
+      <button mat-button (click)="this.stepper.selectedIndex = 1; this.hideOwner = false;">Owner</button>
+      <button mat-button (click)="this.stepper.selectedIndex = 2; hideRenters= false">Renters</button>
+    </div>
+  </mat-step>
+
+  <mat-step label="Step 2" state="chat">
+    <p>Socialize with each other.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperNext>Next</button>
+    </div>
+  </mat-step>
+  <mat-step label="Step 3">
+    <p>You're welcome.</p>
+    <mat-card>Simple card</mat-card>
+  </mat-step>
+
+  <mat-step label="Step 4">
+    <p>You're welcome.</p>
+    <mat-card>Simple card</mat-card>
+    <md-step-body>
+      <p>Step content</p>
+    </md-step-body>
+    <md-step-actions>
+
+    </md-step-actions>
+  </mat-step>
+
+   <!-- Custom icon with a context variable. -->
+   <!-- '<ng-template matStepperIcon="number" let-index="index">
+    {{index + 10}}
+  </ng-template>' -->
+
+  <!-- Icon overrides. -->
+  <ng-template matStepperIcon="phone">
+    <mat-icon>call_end</mat-icon>
+  </ng-template>
+  <ng-template matStepperIcon="chat">
+    <mat-icon>forum</mat-icon>
+  </ng-template>
+
+</mat-horizontal-stepper>
