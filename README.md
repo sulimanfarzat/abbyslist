@@ -1,4 +1,5 @@
-# Abbyslist Web Aplication
+# Abbyslist Web Application - Angular 7 + Angular Material
+
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.4.
 
