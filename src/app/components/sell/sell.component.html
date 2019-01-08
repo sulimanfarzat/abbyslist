@@ -1,40 +1,62 @@
 
-<mat-horizontal-stepper class="mat-elevation-z12" 
-        [ngClass]="{ 'hidden-step-header-owner' : hideOwner , 'hidden-step-header-renters' : hideRenters }"
+        <!-- [ngClass]="{ 'hidden-step-header-owner' : hideOwner , 'hidden-step-header-renters' : hideRenters }" -->
+<mat-horizontal-stepper class="container  mat-elevation-z12" 
+        [ngClass]="{ 'hidden-header-step-1' : hideStep1 }"
         (selectionChange)="stepperOnClick($event)"
-[linear]="false" linear #stepper>
+        *ngFor="let sell of sellHome"
+        [linear]="false" linear #stepper>
 
   <mat-step label="Step 1" state="phone" (click)="this.hideOwner = true;">
-    <p>I am </p>
-    <div>
-      <button mat-button matStepperNext>Next</button>
-      <button mat-button (click)="this.stepper.selectedIndex = 1; this.hideOwner = false;">Owner</button>
-      <button mat-button (click)="this.stepper.selectedIndex = 2; hideRenters= false">Renters</button>
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="main-heading"> I am</h1>
+      </div>
+    </div>
+    <div class="row align-items-end">
+      <!-- <button mat-button matStepperNext>Next</button> -->
+      <div matRipple [matRippleColor]="'red'" class="col-md-5 ripple-container mat-elevation-z4"
+      (click)="this.stepper.next(); this.hideOwner = false;">
+          {{ sell.Owner }}
+      </div>
+      <div matRipple [matRippleColor]="'red'" class="col-md-5 ripple-container mat-elevation-z4"
+      (click)="this.stepper.next(); this.hideRenters = false">
+          {{ sell.Renters }}
+      </div>
+      
+      <!-- <div matRipple [matRippleColor]="primary" class="col mr-2 ripple-container mat-elevation-z4"
+      (click)="this.stepper.selectedIndex = 1; this.hideOwner = false;">
+          {{ sell.Owner }}
+      </div>
+      <div matRipple [matRippleColor]="primary" class="col ripple-container mat-elevation-z4"
+      (click)="this.stepper.selectedIndex = 1; this.hideRenters= false">
+          {{ sell.Renters }}
+      </div> -->
     </div>
   </mat-step>
 
   <mat-step label="Step 2" state="chat">
-    <p>Socialize with each other.</p>
+    <p *ngIf="! hideOwner"> {{ sell.Owner }} </p>
+    <p *ngIf="! hideRenters"> {{ sell.Renters }} </p>
     <div>
       <button mat-button matStepperPrevious>Back</button>
       <button mat-button matStepperNext>Next</button>
     </div>
   </mat-step>
-  <mat-step label="Step 3">
+
+  <!-- <mat-step label="Step 3">
     <p>You're welcome.</p>
     <mat-card>Simple card</mat-card>
-  </mat-step>
+  </mat-step> -->
 
-  <mat-step label="Step 4">
+  <!-- <mat-step label="Step 4">
     <p>You're welcome.</p>
     <mat-card>Simple card</mat-card>
     <md-step-body>
       <p>Step content</p>
     </md-step-body>
     <md-step-actions>
-
     </md-step-actions>
-  </mat-step>
+  </mat-step> -->
 
    <!-- Custom icon with a context variable. -->
    <!-- '<ng-template matStepperIcon="number" let-index="index">

@@ -6,6 +6,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:dev": "webpack-dev-server",
     "build": "ng build",
     "test": "ng test",
     "lint": "tslint ./src/**/*.ts -t verbose",
@@ -81,7 +82,8 @@
     "ts-node": "^7.0.1",
     "tslint": "~5.11.0",
     "typescript": "~3.1.1",
-    "webpack-cli": "^3.1.2"
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.14"
   },
   "repository": {}
 }

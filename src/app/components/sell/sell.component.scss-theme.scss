@@ -5,8 +5,9 @@
 @mixin styleStepLine($index) {
     .mat-horizontal-stepper-header {
         &+.mat-stepper-horizontal-line:nth-child(#{$index}) {
-            height: 2px;
-            background-image: linear-gradient(to right, #00b495, #00aeea);
+            // height: 2px;
+            // background-image: linear-gradient(to right, #00b495, #00aeea);
+            display: none !important;
         }
     }
   }
@@ -44,10 +45,19 @@
   }
 
  
+
   .hidden-step-header-owner {
     @include styleHiddenStepHeader(2);
+    @include styleStepLine(2);
+    @include styleStepLine(4);
   }
   .hidden-step-header-renters {
     @include styleHiddenStepHeader(3);
+  }
+
+  .hidden-header-step-1 {
+    @include styleHiddenStepHeader(2);
+    @include styleStepLine(2);
+    @include styleStepLine(4);
   }
   // css for stepper end ********************************

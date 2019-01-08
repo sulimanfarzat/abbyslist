@@ -11,8 +11,15 @@ import { NgClass } from '@angular/common';
 })
 export class SellComponent implements OnInit , AfterContentInit {
 
+  sellHome: any[] = [
+    {
+      'Owner' : 'Sell' ,
+      'Renters' : 'Rent'
+    },
+  ];
   hideOwner = true;
   hideRenters = true;
+  hideStep1 = true; // scss class hide
   @ViewChild('stepper') public stepper: MatStepper;
   @ViewChild('stepper') public stepHeader: MatStepHeader;
 
@@ -27,12 +34,26 @@ export class SellComponent implements OnInit , AfterContentInit {
     // you can get to the element content here
     //  this.el.nativeElement = '';
     // console.log('headrr: ' , this._elemRef.nativeElement.innerHTML , this._renderer);
-
 }
 
 
   stepperOnClick(event) {
     console.log(event);
+    // if (event.selectedIndex === 0) {
+    //   this.hideOwner = true;
+    //   this.hideRenters = true;
+    // }
+    switch (event.selectedIndex) {
+      case 0: this.hideStep1 = true;
+              this.hideOwner = true;
+              this.hideRenters = true;
+        break;
+      // case 1: this.hideOwner = false; this.hideRenters = false;
+        // break;
+
+      default: this.hideStep1 = false;
+        break;
+    }
   }
 
   choiseStepper() {
