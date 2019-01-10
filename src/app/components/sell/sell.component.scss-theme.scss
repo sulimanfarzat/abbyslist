@@ -46,18 +46,63 @@
 
  
 
-  .hidden-step-header-owner {
-    @include styleHiddenStepHeader(2);
+  .hidden-step-header-3-4 {
+    @include styleHiddenStepHeader(3);
+    @include styleHiddenStepHeader(4);
     @include styleStepLine(2);
     @include styleStepLine(4);
+    @include styleStepLine(6);
   }
-  .hidden-step-header-renters {
-    @include styleHiddenStepHeader(3);
+  .hidden-step-header-4 {
+    @include styleHiddenStepHeader(4);
+    @include styleStepLine(6);
   }
 
   .hidden-header-step-1 {
     @include styleHiddenStepHeader(2);
+    @include styleHiddenStepHeader(3);
+    @include styleHiddenStepHeader(4);
     @include styleStepLine(2);
     @include styleStepLine(4);
+    @include styleStepLine(6);
   }
   // css for stepper end ********************************
+
+  @mixin abby-sell-component-theme($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+ 
+  app-sell {
+
+    .ripple-container {
+      cursor: pointer;
+      text-align: center;
+    
+      // width: 100%;
+      // outline-width: 100%;
+      height: 75px;
+      line-height: 75px;
+      margin: 0 0 20px 0;
+      border-radius: 4px;
+      background-color: mat-color($accent, 900, 300);
+      color: mat-color($accent, 50);
+  
+        &:hover {
+              background-color: mat-color($accent, darker);
+            }
+    
+      user-select: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+    
+      -webkit-user-drag: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+
+    }
+  }
+  

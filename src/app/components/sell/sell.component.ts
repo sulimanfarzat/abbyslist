@@ -11,14 +11,25 @@ import { NgClass } from '@angular/common';
 })
 export class SellComponent implements OnInit , AfterContentInit {
 
-  sellHome: any[] = [
+  sellHome: {[key: string]: any} = [
     {
-      'Owner' : 'Sell' ,
-      'Renters' : 'Rent'
-    },
+      'iam': {
+        'owner' : 'Owner',
+        'renter' : 'Renter',
+      },
+      'iwant': {
+        'owner': ['Rent', 'Sell'],
+        'renter' : ['apartment', 'House', 'Shared Room', 'furnished real estate', 'car park / Garege'],
+        'iSell': ['apartment', 'House', 'Shared Room'],
+        'iRent': ['apartment', 'House', 'Shared Room', 'xxxxxx', 'xxxx']
+      }
+    }
   ];
+
+  isValid = true;
   hideOwner = true;
-  hideRenters = true;
+  hideRenter = true;
+  hideLast = true ;
   hideStep1 = true; // scss class hide
   @ViewChild('stepper') public stepper: MatStepper;
   @ViewChild('stepper') public stepHeader: MatStepHeader;
@@ -38,7 +49,7 @@ export class SellComponent implements OnInit , AfterContentInit {
 
 
   stepperOnClick(event) {
-    console.log(event);
+    // console.log(event);
     // if (event.selectedIndex === 0) {
     //   this.hideOwner = true;
     //   this.hideRenters = true;
@@ -46,7 +57,7 @@ export class SellComponent implements OnInit , AfterContentInit {
     switch (event.selectedIndex) {
       case 0: this.hideStep1 = true;
               this.hideOwner = true;
-              this.hideRenters = true;
+              this.hideRenter = true;
         break;
       // case 1: this.hideOwner = false; this.hideRenters = false;
         // break;
@@ -65,6 +76,18 @@ export class SellComponent implements OnInit , AfterContentInit {
     // const stp = document.querySelector('mat-step-header');
     // stp.className = 'hidden';
   }
+
+
+     changeValue(item) {
+        console.log(item);
+        if (item === 'Rent') {
+          this.hideRenter = true;
+          this.hideOwner = false;
+        } else {
+          this.hideOwner = true;
+          this.hideRenter = false;
+        }
+     }
 
 
 

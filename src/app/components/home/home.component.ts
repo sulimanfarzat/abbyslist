@@ -63,9 +63,9 @@ export class HomeComponent implements OnInit {
 
 
   ngOnInit() {
-    this.api.loadGeocod().subscribe(
-      val => {this.options = val['results'][0]['address_components'];   console.log(val['results'][0]['address_components']); }
-    );
+    // this.api.loadGeocod().subscribe(
+    //   val => {this.options = val['results'][0]['address_components'];   console.log(val['results'][0]['address_components']); }
+    // );
   }
 
 

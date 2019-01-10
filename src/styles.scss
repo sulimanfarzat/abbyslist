@@ -53,9 +53,9 @@
 
 @mixin custom-components-theme($theme) {
   // @include anms-styles-reset-theme($theme);
-  @include anms-app-component-theme($theme);
-  @include anms-about-component-theme($theme);
-  // @include anms-todos-container-component-theme($theme);
+  @include abby-app-component-theme($theme);
+  @include abby-about-component-theme($theme);
+  @include abby-sell-component-theme($theme);
   // @include anms-stock-market-container-component-theme($theme);
   // @include anms-parent-component-theme($theme);
   // @include anms-child-component-theme($theme);
@@ -63,23 +63,23 @@
 }
 
 .default-theme {
-  @include angular-material-theme($anms-theme);
-  @include custom-components-theme($anms-theme);
+  @include angular-material-theme($abby-theme);
+  @include custom-components-theme($abby-theme);
 }
 
 .light-theme {
-  @include angular-material-theme($anms-light-theme);
-  @include custom-components-theme($anms-light-theme);
+  @include angular-material-theme($abby-light-theme);
+  @include custom-components-theme($abby-light-theme);
 }
 
 .black-theme {
-  @include angular-material-theme($anms-black-theme);
-  @include custom-components-theme($anms-black-theme);
+  @include angular-material-theme($abby-black-theme);
+  @include custom-components-theme($abby-black-theme);
 }
 
 .nature-theme {
-  @include angular-material-theme($anms-nature-theme);
-  @include custom-components-theme($anms-nature-theme);
+  @include angular-material-theme($abby-nature-theme);
+  @include custom-components-theme($abby-nature-theme);
 }
 
 
