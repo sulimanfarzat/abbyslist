@@ -1,15 +1,28 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterContentChecked, AfterContentInit, Directive, Renderer } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { StepperSelectionEvent } from '@angular/cdk/stepper';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { StepperSelectionEvent, STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { MatStepper, MatStepHeader } from '@angular/material';
 import { NgClass } from '@angular/common';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-sell',
   templateUrl: './sell.component.html',
-  styleUrls: ['./sell.component.scss']
+  styleUrls: ['./sell.component.scss'],
+  providers: [{
+    provide: STEPPER_GLOBAL_OPTIONS, useValue: {displayDefaultIndicatorType: false}
+  }]
 })
 export class SellComponent implements OnInit , AfterContentInit {
+
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe([
+    Breakpoints.Handset,
+    Breakpoints.TabletPortrait,
+  ])
+    .pipe(
+      map(result => result.matches)
+    );
 
   sellHome: {[key: string]: any} = [
     {
@@ -20,8 +33,8 @@ export class SellComponent implements OnInit , AfterContentInit {
       'iwant': {
         'owner': ['Rent', 'Sell'],
         'renter' : ['apartment', 'House', 'Shared Room', 'furnished real estate', 'car park / Garege'],
-        'iSell': ['apartment', 'House', 'Shared Room'],
-        'iRent': ['apartment', 'House', 'Shared Room', 'xxxxxx', 'xxxx']
+        'iSell': ['apartment', 'House', 'Land', 'investment', 'commercial objects'],
+        'iRent': ['apartment', 'House', 'Shared Room', 'furnished real estate', 'car park / Garege']
       }
     }
   ];
@@ -29,22 +42,17 @@ export class SellComponent implements OnInit , AfterContentInit {
   isValid = true;
   hideOwner = true;
   hideRenter = true;
-  hideLast = true ;
   hideStep1 = true; // scss class hide
   @ViewChild('stepper') public stepper: MatStepper;
   @ViewChild('stepper') public stepHeader: MatStepHeader;
 
-  constructor(private _elemRef: ElementRef, private _renderer: Renderer) {
-    // this._renderer.setElementProperty(this._elemRef.nativeElement, 'innerHTML', 'my new content');
+  constructor( private breakpointObserver: BreakpointObserver ) {
 }
 
   ngOnInit() {
   }
 
   ngAfterContentInit () {
-    // you can get to the element content here
-    //  this.el.nativeElement = '';
-    // console.log('headrr: ' , this._elemRef.nativeElement.innerHTML , this._renderer);
 }
 
 
@@ -59,8 +67,6 @@ export class SellComponent implements OnInit , AfterContentInit {
               this.hideOwner = true;
               this.hideRenter = true;
         break;
-      // case 1: this.hideOwner = false; this.hideRenters = false;
-        // break;
 
       default: this.hideStep1 = false;
         break;
@@ -83,9 +89,13 @@ export class SellComponent implements OnInit , AfterContentInit {
         if (item === 'Rent') {
           this.hideRenter = true;
           this.hideOwner = false;
+          console.log('this.hideRenter ' , this.hideRenter );
+          console.log('this.hideOwner ' , this.hideOwner );
         } else {
           this.hideOwner = true;
           this.hideRenter = false;
+          console.log('this.hideRenter ' , this.hideRenter );
+          console.log('this.hideOwner ' , this.hideOwner );
         }
      }
 

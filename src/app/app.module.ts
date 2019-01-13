@@ -5,6 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
 
+// Import firebase library
+import { NgxAuthFirebaseUIModule } from 'ngx-auth-firebaseui';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+
 import { PLATFORM_ID, APP_ID, Inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
@@ -21,6 +28,7 @@ import { AgmCoreModule } from '@agm/core';
 import 'hammerjs';
 import { FullscreenOverlayContainer, OverlayContainer } from '@angular/cdk/overlay';
 import { OverlayModule } from '@angular/cdk/overlay';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 // services
@@ -40,6 +48,7 @@ import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { SellComponent } from './components/sell/sell.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { AuthFirebaseService } from './services/auth/auth-firebase.service';
 
 const googleMapsParams = {
   apiKey: environment.GOOGLE_MAPS_API_KEY,
@@ -47,6 +56,21 @@ const googleMapsParams = {
   // language: 'en',
   // region: 'DE'
 };
+const config = {
+  apiKey: 'AIzaSyAoXjdOJxY_AbL3n9O_JcRkKZL77jvUDdw',
+  authDomain: 'abbys-list.firebaseapp.com',
+  databaseURL: 'https://abbys-list.firebaseio.com',
+  projectId: 'abbys-list',
+  storageBucket: 'abbys-list.appspot.com',
+  messagingSenderId: '286898223862'
+};
+const firebaseUIModuleSettings = {
+  enableFirestoreSync: true, // enable/disable autosync users with firestore
+  onlyEmailPasswordAuth : true, // enable/disable signin/up with auth providers like google, facebook, twitter - default: false
+  toastMessageOnAuthSuccess: true, // whether to open/show a snackbar message on auth success - default : true
+  toastMessageOnAuthError: true // whether to open/show a snackbar message on auth error - default : true
+};
+
 
 @NgModule({
 
@@ -60,9 +84,21 @@ const googleMapsParams = {
     LayoutModule,
     AppRoutingModule,
     HttpClientModule,
+    FlexLayoutModule,
     MatGoogleMapsAutocompleteModule.forRoot(),
     AgmCoreModule.forRoot(googleMapsParams),
     StoreModule.forRoot(reducers, { metaReducers }),
+    // 3. Initialize
+    AngularFireModule.initializeApp(config),
+    AngularFirestoreModule, // firestore
+    AngularFireAuthModule, // auth
+    AngularFireStorageModule, // storage
+    // Specify the ngx-auth-firebaseui library as an import
+    NgxAuthFirebaseUIModule.forRoot(
+      config,
+      () => 'Abbys List' ,
+      firebaseUIModuleSettings
+      ),
   ],
 
   declarations: [
@@ -83,7 +119,8 @@ const googleMapsParams = {
     PathResolveService,
     FilePreviewOverlayService,
     {provide: OverlayContainer, useClass: FullscreenOverlayContainer},
-    ApiGeocodService
+    ApiGeocodService,
+    AuthFirebaseService
   ],
 
   entryComponents: [ SignInComponent, SellComponent ],

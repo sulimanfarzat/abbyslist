@@ -5,6 +5,9 @@ import { Observable } from 'rxjs';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { map } from 'rxjs/operators';
 
+import {AuthProvider, Theme} from 'ngx-auth-firebaseui'; // auth firebase
+import { MatSnackBar } from '@angular/material';
+
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -19,6 +22,14 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./sign-in.component.scss']
 })
 export class SignInComponent implements OnInit {
+
+  // new auth firebase
+  themes = Theme;
+  providers = AuthProvider;
+  user;
+  message: string;
+  errorMessage: string;
+
 
   // isHandset$: Observable<boolean> = this.breakpointObserver.observe([Breakpoints.Handset])
   //   .pipe(
@@ -54,6 +65,7 @@ export class SignInComponent implements OnInit {
   hide = true;
 
   constructor(private fb: FormBuilder,
+              public snackBar: MatSnackBar,
               private breakpointObserver: BreakpointObserver) {  }
 
   ngOnInit() {
@@ -73,6 +85,28 @@ export class SignInComponent implements OnInit {
       console.log(this.signUpForm.value);
     }
   }
+
+
+
+  // NEW AUTH FIREBASE
+
+  saveUser($event) {
+    this.user = $event;
+    this.message = `${this.user.displayName} here we go!`;
+    console.log('Auth success - user = ', this.user, this.user.displayName);
+  }
+
+  handleError($event) {
+    this.errorMessage = `Oops! ${$event}`;
+  }
+
+  showCopyMessage(content: string) {
+    this.snackBar.open(`${content} copied`, 'OK', {
+      duration: 3000
+    });
+
+  }
+
 
 
 

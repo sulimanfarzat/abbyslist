@@ -24,11 +24,14 @@
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "../node_modules/ngx-auth-firebaseui/dist/assets/",
+                "output": "./assets/"
+              }
             ],
             "styles": [
-              // "src/themes/default-theme.scss",
-              // "src/styles.scss"
               { "input": "src/styles-app-loading.scss" },
               { "input": "src/styles.scss" }
             ],

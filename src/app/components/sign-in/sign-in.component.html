@@ -1,151 +1,45 @@
-<mat-card class="container mat-elevation-z8">
-        <!-- <mat-card-header>
-            <mat-card-title>Sign in or Join</mat-card-title>
-        </mat-card-header> -->
-        <mat-toolbar color="primary">Sign in or Join</mat-toolbar>
-        <mat-card-content>
-    <mat-tab-group dynamicHeight
-            mat-stretch-tabs
-            [backgroundColor]="'primary'" 
-            [color]="'accent'"
-            animationDuration="1000ms" 
-            [selectedIndex]="0">
+<div class="jumbotron jumbotron-fluid">
 
-        <mat-tab label="Sign in">
-            <form [formGroup]="signInForm" novalidate (ngSubmit)="onSignIn()">
-                <div class="row p-4 justify-content-center">
+  <div class="container">
 
-                    <div class="col-12">
-                        <div class="row">
-                                <mat-form-field appearance="outline" class="col">
-                                    <mat-label>Enter your Email</mat-label>
-                                    <input matInput placeholder="Please Enter a valid Email" formControlName="email" [errorStateMatcher]="matcher"
-                                        required>
-                                    <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
-                                    <mat-error *ngIf="signInForm.controls['email'].hasError && !signInForm.controls['email'].hasError('required')">
-                                        Please enter a valid email address
-                                    </mat-error>
-                                    <mat-error *ngIf="signInForm.controls['email'].hasError('required')">
-                                        Email is <strong>required</strong>
-                                    </mat-error>
-                                </mat-form-field>
-                        </div>
-                        <div class="row">
-                                <mat-form-field class="col" appearance="outline">
-                                    <mat-label>Enter your password</mat-label>
-                                    <input matInput placeholder="please Enter min 8 charecter" [type]="hide ? 'password' : 'text'"
-                                        minlength="8" formControlName="password" [errorStateMatcher]="matcher" required>
-                                    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' :
-                                        'visibility'}}</mat-icon>
-                                    <mat-error *ngIf="signInForm.controls['password'].hasError && !signInForm.controls['password'].hasError('required')">
-                                        At least 8 characters
-                                    </mat-error>
-                                    <mat-error *ngIf="signInForm.controls['password'].hasError('required')">
-                                        password is <strong>required</strong>
-                                    </mat-error>
-                                </mat-form-field>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <button mat-raised-button color="primary" type="submit">Sign In</button>
-                            </div>
-                            <div>
-                                <div class="col align-self-end">
-                                    <span> Or connect with: </span>
-                                    <button mat-mini-fab color="primary" class="ml-1">
-                                        <mat-icon svgIcon="google"></mat-icon>
-                                    </button>
-                                    <button mat-mini-fab color="primary" class="ml-1">
-                                        <mat-icon svgIcon="facebook-f"></mat-icon>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    <h1>Appearance</h1>
 
-                </div>
-            </form>
-        </mat-tab>
+  </div>
+
+</div>
 
 
 
-        <mat-tab label="New account">
-                <form [formGroup]="signUpForm" novalidate (ngSubmit)="onSignUp()">
-                        <div class="row p-4 justify-content-center">
-                            <div class="col-12">
-                                <div class="row">
-                                    <mat-form-field appearance="outline" class="col">
-                                        <mat-label>Enter your Firs Name</mat-label>
-                                        <input matInput placeholder="First name" formControlName="firstName" [errorStateMatcher]="matcher">
-                                        <mat-error *ngIf="signUpForm.controls['firstName'].hasError('required')">
-                                            First name is <strong>required</strong>
-                                        </mat-error>
-                                    </mat-form-field>
-                                    <mat-form-field appearance="outline" class="col">
-                                        <mat-label>Enter your Last Name</mat-label>
-                                        <input matInput placeholder="Last name" formControlName="lastName" [errorStateMatcher]="matcher">
-                                        <mat-error *ngIf="signUpForm.controls['lastName'].hasError('required')">
-                                            Last name is <strong>required</strong>
-                                        </mat-error>
-                                    </mat-form-field>
-                                </div>
-                                <div class="row">
-                                    <mat-form-field appearance="outline" class="col">
-                                        <mat-label>Enter your Email</mat-label>
-                                        <input matInput placeholder="Please Enter a valid Email" formControlName="email" [errorStateMatcher]="matcher"
-                                            required>
-                                        <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
-                                        <mat-error *ngIf="signUpForm.controls['email'].hasError && !signUpForm.controls['email'].hasError('required')">
-                                            Please enter a valid email address
-                                        </mat-error>
-                                        <mat-error *ngIf="signUpForm.controls['email'].hasError('required')">
-                                            Email is <strong>required</strong>
-                                        </mat-error>
-                                    </mat-form-field>
-                                    <mat-form-field appearance="outline" class="col">
-                                        <mat-label>Enter your password</mat-label>
-                                        <input matInput placeholder="please Enter min 8 charecter" [type]="hide ? 'password' : 'text'"
-                                            formControlName="password" [errorStateMatcher]="matcher" required>
-                                        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' :
-                                            'visibility'}}</mat-icon>
-                                        <mat-error *ngIf="signInForm.controls['email'].hasError && !signInForm.controls['email'].hasError('required')">
-                                            At least 8 characters
-                                        </mat-error>
-                                        <mat-error *ngIf="signInForm.controls['email'].hasError('required')">
-                                            Email is <strong>required</strong>
-                                        </mat-error>
-                                    </mat-form-field>
-                                </div>
-                        
-                                <div class="row ">
-                                    <div class="col">
-                                        <button mat-raised-button color="primary" type="submit">Sign up</button>
-                                    </div>
-                                    <div>
-                                    <div class="col align-self-end">
-                                        <span> Or connect with: </span>
-                                        <button mat-mini-fab color="primary" class="ml-1">
-                                            <mat-icon svgIcon="google"></mat-icon>
-                                        </button>
-                                        <button mat-mini-fab color="primary" class="ml-1">
-                                            <mat-icon svgIcon="facebook-f"></mat-icon>
-                                        </button>
-                                    </div>
-                                    </div>
-                                </div>
-                            </div>
-                        
-                        
-                        </div>
-                        
-                    </form>
-        </mat-tab>
+<div class="container">
 
-    </mat-tab-group>
-</mat-card-content>
+  <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="center">
 
- <!-- <mat-card-actions> -->
-        <!-- <button mat-raised-button *ngIf="signin.isActive" color="primary" type="submit">Sign In</button> -->
-        <!-- <button mat-raised-button *ngIf="signup.isActive" color="primary" type="submit">Sign up</button> -->
-<!-- </mat-card-actions> -->
-</mat-card>
+    <mat-card fxFlexAlign.gt-xs="center">
+
+      <!-- <mat-card-title>
+
+        Abbys List
+
+      </mat-card-title> -->
+
+      <mat-card-subtitle>
+        <div fxLayout="row" fxLayoutAlign="space-between">
+
+        </div>
+      </mat-card-subtitle>
+
+      <mat-card-content>
+
+        <ngx-auth-firebaseui (onSuccess)="saveUser($event)" (onError)="handleError($event)" [theme]="themes.FAB"
+          [guestEnabled]="true" tosUrl="/legal/tos" privacyPolicyUrl="/legal/privacy" [tabindex]="1" [providers]="[providers.Google, providers.Facebook, providers.Twitter]"
+          [messageOnAuthSuccess]="message" [messageOnAuthError]="errorMessage">
+
+        </ngx-auth-firebaseui>
+
+      </mat-card-content>
+
+    </mat-card>
+
+  </div>
+
+</div>
