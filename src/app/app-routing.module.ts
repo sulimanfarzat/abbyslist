@@ -6,6 +6,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { PathResolveService } from './services/path-resolve.service';
 import { config } from 'rxjs';
 import { AboutComponent } from './components/about/about.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { AuthGuard } from './settings/guard/auth.guard';
 
 
 /*const routes: Routes = [
@@ -29,12 +31,13 @@ const routes: Routes = [
   },
   {
     path: paths.about,
-    component: AboutComponent
+    component: AboutComponent,
+    canActivate: [AuthGuard]
   },
-  // {
-  //   path: paths.contact,
-  //   component: ContactComponent
-  // },
+  {
+    path: paths.user_profile,
+    component: UserProfileComponent
+  },
   {
     path: '**',
     resolve: {

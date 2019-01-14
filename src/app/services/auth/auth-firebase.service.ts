@@ -34,7 +34,7 @@ export class AuthFirebaseService {
    }
 
 
-  googleLogin() {
+   googleSignin() {
     const provider = new auth.GoogleAuthProvider();
     return this.oAuthLogin(provider);
   }

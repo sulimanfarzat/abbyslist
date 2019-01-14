@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 
 import {AuthProvider, Theme} from 'ngx-auth-firebaseui'; // auth firebase
 import { MatSnackBar } from '@angular/material';
+import { Router } from '@angular/router';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -66,6 +67,7 @@ export class SignInComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               public snackBar: MatSnackBar,
+              private router: Router,
               private breakpointObserver: BreakpointObserver) {  }
 
   ngOnInit() {
@@ -94,6 +96,7 @@ export class SignInComponent implements OnInit {
     this.user = $event;
     this.message = `${this.user.displayName} here we go!`;
     console.log('Auth success - user = ', this.user, this.user.displayName);
+    this.router.navigate(['/profile']);
   }
 
   handleError($event) {

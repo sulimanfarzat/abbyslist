@@ -49,6 +49,7 @@ import { SignInComponent } from './components/sign-in/sign-in.component';
 import { SellComponent } from './components/sell/sell.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { AuthFirebaseService } from './services/auth/auth-firebase.service';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 const googleMapsParams = {
   apiKey: environment.GOOGLE_MAPS_API_KEY,
@@ -112,7 +113,8 @@ const firebaseUIModuleSettings = {
     SignUpComponent,
     SignInComponent,
     SellComponent,
-    FooterComponent
+    FooterComponent,
+    UserProfileComponent
   ],
 
   providers: [
