@@ -1,7 +1,12 @@
 
 <div class="container"><br><br><br><br><br><br>
+    <div fxLayout="row" fxLayoutAlign="space-between">
+        <ngx-auth-firebaseui-user></ngx-auth-firebaseui-user>
+      </div>
+      
 <div *ngIf="auth.user$ | async; then authenticated else guest">
     <!-- template will replace this div -->
+   
 </div>
 
 <!-- User NOT logged in -->
@@ -26,3 +31,4 @@
 </div>
 </ng-template>
 </div>
+

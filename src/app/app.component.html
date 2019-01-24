@@ -82,41 +82,121 @@
             </mat-select>
           </span> -->
           <!-- <span class="spacer"></span> -->
-          <span>          
-            <!-- menu start -->
+
+
+          <!-- sell menu -->
+          <span>
             <div class="button-row">
               <button (click)="showPreviewSellBtn()" mat-flat-button color="primary">
                 Sell by Owner
               </button>
             </div>
-
           </span>
+
+           <!-- account menu -->
           <span>
-            <button *ngIf="!(isHandset$ | async)" mat-button (mouseenter)="trigger.openMenu()" [matMenuTriggerData]="{name: 'Sally'}"
-              [matMenuTriggerFor]="menu">
-              My Account
-            </button>
-            <mat-menu #menu="matMenu">
-              <ng-template matMenuContent let-name="name">
-                <button mat-menu-item (click)="showPreview()">
-                  <mat-icon>account_box</mat-icon>
-                  <span>Sign in or Join</span>
-                </button>
-                <mat-divider></mat-divider>
-                <button mat-menu-item>
-                  <mat-icon>notifications_off</mat-icon>
-                  <span>Sign up</span>
-                </button>
-                <mat-divider></mat-divider>
-                <button mat-menu-item>Log off {{name}}</button>
+                <div (mouseenter)="trigger.openMenu()"
+                      (touchstar)="trigger.openMenu()"
+                      [matMenuTriggerData]="{name: 'Suliman' }" 
+                      [matMenuTriggerFor]="menu">
+                  <!-- <div *ngIf="!(isHandset$ | async); else myAccountHandset"> -->
+                    <div *ngIf="auth.user$ | async as user; then authenticated else myAccountNouser"></div>
+                  <!-- </div> -->
+                </div>
             
-                <mat-grid-list cols="2" rowHeight="2:1">
-                  <mat-grid-tile>1</mat-grid-tile>
-                  <mat-grid-tile>2</mat-grid-tile>
-                  <mat-grid-tile>3</mat-grid-tile>
-                  <mat-grid-tile>4</mat-grid-tile>
-                </mat-grid-list>
-              </ng-template>
+
+            <!-- <ng-template #myAccountHandset>
+                <span fxLayout="row" fxLayoutAlign="center center">
+                    <div fxLayout="column" fxLayoutAlign="center center">
+                        <mat-icon class="iconBig">account_circle</mat-icon>
+                    </div>             
+                    <div class="topnavigation_login_message" fxLayout="column">
+                      <div fxLayout="row">
+                        <span>
+                          <mat-icon>expand_more</mat-icon>
+                        </span>
+                      </div>
+                    </div>
+                  </span> 
+            </ng-template> -->
+
+            <ng-template #myAccountNouser>
+              <span fxLayout="row" fxLayoutAlign="start center">
+                <div style="padding-right:6px" fxLayout="column" fxLayoutAlign="center center">
+                    <mat-icon class="iconBig">account_circle</mat-icon>
+                </div>
+                <div class="topnavigation_login_message" fxLayout="column">
+                  <span *ngIf="!(isHandset$ | async)" >Sign in</span>
+                  <div fxLayout="row">
+                    <span *ngIf="!(isHandset$ | async)" >My Account</span>
+                    <span>
+                      <mat-icon>expand_more</mat-icon>
+                    </span>
+                  </div>
+                </div>
+              </span>
+            </ng-template>
+
+            <!-- User logged in -->
+            <ng-template #authenticated>
+              <div *ngIf="auth.user$ | async as user">
+
+                  <!--card header-->
+                  <span fxLayout="row" fxLayoutAlign="center center">
+    
+                    <img mat-card-avatar *ngIf="user.photoURL; else noImage" [src]="user.photoURL">
+                    <ng-template #noImage><mat-icon>account_circle</mat-icon> </ng-template>
+            
+                    <div *ngIf="user.emailVerified; then emailVerified else emailNotVerified"></div>
+                    <ng-template #emailVerified>
+                      <mat-icon color="accent" matTooltip="email is verified" matTooltipPosition="after">
+                        verified_user
+                      </mat-icon>
+                    </ng-template>
+                    <ng-template #emailNotVerified>
+                      <mat-icon color="warn" matTooltip="email is not verified" matTooltipPosition="after">
+                        warning
+                      </mat-icon>
+                    </ng-template>
+
+                    <div class="topnavigation_login_message" fxLayout="column">
+                      <span *ngIf="!(isHandset$ | async)" >{{ user.email | slice:0:15 }}...</span>
+                      <div fxLayout="row">
+                        <span *ngIf="!(isHandset$ | async)" >{{ user.displayName }}</span>
+                        <span><mat-icon>expand_more</mat-icon></span>
+                      </div>
+                    </div>
+
+                  </span>
+
+                </div>
+            </ng-template>
+
+
+            <mat-menu #menu="matMenu">
+              <div (mouseleave)="trigger.closeMenu()">
+                <ng-template matMenuContent let-name="name">
+                  <button (click)="showPreview()" mat-menu-item>
+                    <mat-icon>account_box</mat-icon>
+                    <span>Sign in or Join</span>
+                  </button>
+                  <mat-divider></mat-divider>
+                  <button routerLink="/profile" mat-menu-item>
+                    <mat-icon>person_outline</mat-icon>
+                    <span>my Profile</span>
+                  </button>
+                  <mat-divider></mat-divider>
+                  <button mat-menu-item>Log off {{name}}</button>
+            
+                  <mat-grid-list cols="2" rowHeight="2:1">
+                    <mat-grid-tile>1</mat-grid-tile>
+                    <mat-grid-tile>2</mat-grid-tile>
+                    <mat-grid-tile>3</mat-grid-tile>
+                    <mat-grid-tile>4</mat-grid-tile>
+                  </mat-grid-list>
+
+                </ng-template>
+              </div>
             </mat-menu>
           </span>
 

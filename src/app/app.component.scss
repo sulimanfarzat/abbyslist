@@ -1,4 +1,4 @@
-// **************
+  // **************
   // @media only screen and (max-width: 300px) {
   //   .slide-menu {
   //     width: 100%;
@@ -8,6 +8,33 @@
 // *************
 
 @import '../styles-variables.scss';
+
+.iconBig{
+  font-size: 40px !important;
+  height: 40px;
+  width: 40px;
+}
+
+.topnavigation_login_message {
+  mat-icon{
+    margin-top: 4px;
+  }
+  span{
+    font-size: 0.7rem;
+    margin-bottom: -7px;
+  }
+  div{
+    span{
+      font-size: 1.0rem;
+      margin-top: -7px;
+    }
+  }
+      &:hover {
+        text-decoration: none;
+        color: aqua
+      }  
+
+}
 
 .theme-wrapper {
   height: 100%;

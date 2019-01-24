@@ -1,5 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import browser from 'browser-detect';
+import { Component, OnInit, ViewChild, Input, Renderer } from '@angular/core';
 import { slideInAnimation } from './animations/router.animation';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { MatIconRegistry, MatMenuTrigger } from '@angular/material';
@@ -7,11 +6,15 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { environment as env } from '../environments/environment';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
+import { User } from './services/auth/user.model';
 
 import { AppState} from './core/core.state';
 import { selectEffectiveTheme } from './settings/settings.selectors';
 import { FilePreviewOverlayRef } from './services/overlay/file-preview-overlay-ref';
 import { FilePreviewOverlayService } from './services/overlay/file-preview-overlay.service';
+import { AuthFirebaseService } from './services/auth/auth-firebase.service';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { map } from 'rxjs/operators';
 declare var require: any;
 
 @Component({
@@ -27,6 +30,14 @@ declare var require: any;
 export class AppComponent implements OnInit {
 
   @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
+
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe([
+    Breakpoints.Handset,
+    // Breakpoints.XSmall,
+  ])
+    .pipe(
+      map(result => result.matches)
+    );
 
   themes = [
     { value: 'DEFAULT-THEME', label: 'blue' },
@@ -61,6 +72,8 @@ export class AppComponent implements OnInit {
   // }
 
   constructor(private iconRegistry: MatIconRegistry,
+    public breakpointObserver: BreakpointObserver,
+    public auth: AuthFirebaseService,
     public overlayContainer: OverlayContainer,
     private previewDialog: FilePreviewOverlayService,
     private sanitizer: DomSanitizer,
@@ -93,8 +106,6 @@ export class AppComponent implements OnInit {
   showPreviewSellBtn() {
     this.previewDialog.openSell();
   }
-
-
 
 
 }
